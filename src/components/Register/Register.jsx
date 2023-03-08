@@ -3,7 +3,29 @@ import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import Separator from "../../components/Separatore/Separator";
 import "./style.css";
+
+const defaults = {
+  email: "",
+  password: "",
+  repeatPassword: "",
+  check: false,
+};
 class Register extends Component {
+  state = {
+    email: "",
+    password: "",
+    repeatPassword: "",
+    check: false,
+  };
+  handelChange = (e) => {
+    const { id, value, checked } = e.target;
+    this.setState((prev) => ({ ...prev, [id]: value, check: checked }));
+    console.log(this.state);
+  };
+  handelSubmit = (e) => {
+    e.preventDefault();
+    this.setState((prev) => ({ ...prev, ...defaults }));
+  };
   render() {
     return (
       <div className="registerWrapper">
@@ -14,14 +36,14 @@ class Register extends Component {
           </span>
         </div>
         <Separator />
-        <form className="registerForm">
+        <form className="registerForm" onSubmit={this.handelSubmit}>
           <div className="registerInputs">
             <Input
               placeholder="Enter email address"
               type="email"
               label="Email Address"
               id="email"
-              // value=""
+              value={this.state.email}
               isRequired={true}
               handelChange={this.handelChange}
             />
@@ -30,7 +52,7 @@ class Register extends Component {
               type="password"
               label="Create password"
               id="password"
-              // value=""
+              value={this.state.password}
               isRequired={true}
               handelChange={this.handelChange}
             />
@@ -39,13 +61,19 @@ class Register extends Component {
               type="password"
               label="Repeat password"
               id="repeatPassword"
-              // value=""
+              value={this.state.repeatPassword}
               isRequired={true}
               handelChange={this.handelChange}
             />
           </div>
           <div className="registerAgree">
-            <input type="checkbox" id="check" required />
+            <input
+              type="checkbox"
+              id="check"
+              required
+              onChange={this.handelChange}
+              defaultChecked={this.state.check}
+            />
             <label htmlFor="check" className="checkLabel">
               I agree to terms & conditions
             </label>
@@ -56,11 +84,10 @@ class Register extends Component {
         </form>
         <Separator title="or" />
         <div className="loginBtn">
-        <Button title="login" type="button" toggle />
+          <Button title="login" type="button" toggle />
         </div>
       </div>
     );
   }
 }
-
 export default Register;

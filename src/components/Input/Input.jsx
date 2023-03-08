@@ -13,8 +13,8 @@ class Input extends Component {
           type={type}
           placeholder={placeholder}
           id={id}
-          value={value}
           onChange={(e) => handelChange(e)}
+          value={value}
           className="input"
         />
       </div>
