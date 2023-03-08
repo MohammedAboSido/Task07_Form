@@ -1,0 +1,45 @@
+.gamersWrapper{
+    width:45vw ;
+    background-image: url("../../assets/images/bg_image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.gamersContainer{
+    width: 100%;
+    height: 100%;
+    padding:4rem 4.7rem ;
+    background-color: rgba(21, 102, 216, 0.9);
+    padding-bottom: 20rem;
+}
+.gamersContainerImg{
+    padding-bottom: 13rem;
+}
+
+.gamersDescWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+}
+.gamersDesc{
+    line-height: 2.3rem;
+    font-size: 1.3rem;
+    color: #fefefe;
+    padding-bottom: 4.5rem;
+}
+
+.gamersPerson{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4rem;
+}
+
+.gamersPersonName{
+    color: #f1f2f6;
+    font-size: 1.3rem;
+}
+.gamersPersonImg{
+    align-self: flex-end;
+}

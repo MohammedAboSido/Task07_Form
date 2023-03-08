@@ -1,10 +1,10 @@
 import React from "react";
-import HomePage from "../pages/HomePage/HomePage";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
 class Home extends React.Component {
   render() {
     return (
       <div>
-        <HomePage/>
+        <RegisterPage/>
       </div>
     );
   }
