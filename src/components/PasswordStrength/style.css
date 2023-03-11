@@ -1,0 +1,55 @@
+.passwordStrengthWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.passwordStrengthLine {
+  display: none;
+  width: 0;
+  height: 0.3rem;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+.passwordStrengthLine.one {
+  width: 25%;
+  background-color: #df411a;
+  display: block;
+}
+.passwordStrengthLine.two {
+  width: 50%;
+  background-color: #f7cf20;
+  display: block;
+}
+.passwordStrengthLine.three {
+  width: 75%;
+  background-color: green;
+  display: block;
+}
+.passwordStrengthLine.four {
+  width: 100%;
+  background-color: #3db724;
+  display: block;
+}
+
+.passwordStrengthTitle {
+  display: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.passwordStrengthTitle.one {
+  color: #df411a;
+  display: block;
+}
+.passwordStrengthTitle.two {
+  color: #f7cf20;
+  display: block;
+}
+.passwordStrengthTitle.three {
+  color: green;
+  display: block;
+}
+.passwordStrengthTitle.four {
+  color: #3db724;
+  display: block;
+}
