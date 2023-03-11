@@ -1,0 +1,44 @@
+.gamersLoginWrapper {
+  width: 45vw;
+  background-image: url("../../assets/images/bg_image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.gamersLoginContainer {
+  width: 100%;
+  height: 100%;
+  padding: 4rem 4.7rem;
+  background-color: white;
+  padding-bottom: 20rem;
+}
+.gamersLoginContainerImg {
+  padding-bottom: 13rem;
+}
+
+.gamersLoginDescWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+.gamersLoginDesc {
+  line-height: 2.3rem;
+  font-size: 1.3rem;
+  color: #696f79;
+  padding-bottom: 4.5rem;
+}
+
+.gamersLoginPerson {
+  width: 100%;
+  position: relative;
+}
+
+.gamersLoginPersonName {
+  color: #696f79;
+  font-size: 1.3rem;
+}
+.gamersLoginPersonImg {
+  position: absolute;
+  right: -30%;
+  top: -4rem;
+}

@@ -3,7 +3,6 @@ import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import Separator from "../../components/Separatore/Separator";
 import "./style.css";
-
 const defaults = {
   email: "",
   password: "",
@@ -20,11 +19,11 @@ class Register extends Component {
   handelChange = (e) => {
     const { id, value, checked } = e.target;
     this.setState((prev) => ({ ...prev, [id]: value, check: checked }));
-    console.log(this.state);
   };
   handelSubmit = (e) => {
     e.preventDefault();
     this.setState((prev) => ({ ...prev, ...defaults }));
+    console.log(this.state);
   };
   render() {
     return (
