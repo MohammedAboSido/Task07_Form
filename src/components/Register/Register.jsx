@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import * as yup from "yup";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import Separator from "../../components/Separatore/Separator";
 import PasswordStrength from "./../PasswordStrength/PasswordStrength";
 import "./style.css";
 const defaults = {
+  name: "",
   email: "",
   password: "",
   repeatPassword: "",
@@ -25,6 +27,7 @@ const vStrong =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[A-Za-z\d@#$%^&+=]+$/;
 class Register extends Component {
   state = {
+    name: "",
     email: "",
     password: "",
     repeatPassword: "",
@@ -32,6 +35,27 @@ class Register extends Component {
     degree: "",
     title: "",
   };
+
+  schema = yup.object().shape({
+    name: yup
+      .string()
+      .min(6)
+      .max(16)
+      .required()
+      .matches(/^[a-z]+$/),
+    email: yup.string().email().required(),
+    password: yup
+      .string()
+      .min(8)
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+      ),
+    repeatPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null])
+      .required(),
+    check: yup.boolean().oneOf([true]).required(),
+  });
   handelChange = (e) => {
     const { id, value, checked } = e.target;
     this.setState((prev) => ({ ...prev, [id]: value, check: checked }));
@@ -80,8 +104,21 @@ class Register extends Component {
 
   handelSubmit = (e) => {
     e.preventDefault();
-    this.setState((prev) => ({ ...prev, ...defaults }));
-    console.log(this.state);
+    this.schema
+      .validate(
+        {
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+          repeatPassword: this.state.repeatPassword,
+          check: this.state.check,
+        },
+        { abortEarly: false }
+      )
+      .then(() => {
+        this.setState((prev) => ({ ...prev, ...defaults }));
+      })
+      .catch((e) => console.log(e.errors));
   };
   render() {
     return (
@@ -95,6 +132,15 @@ class Register extends Component {
         <Separator />
         <form className="registerForm" onSubmit={this.handelSubmit}>
           <div className="registerInputs">
+            <Input
+              placeholder="Enter Your Name"
+              type="text"
+              label="Name"
+              id="name"
+              value={this.state.name}
+              isRequired={true}
+              handelChange={this.handelChange}
+            />
             <Input
               placeholder="Enter email address"
               type="email"
