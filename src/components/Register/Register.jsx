@@ -20,11 +20,7 @@ const degrees = {
   degThree: ["three", "Strong"],
   degFour: ["four", "Very Strong"],
 };
-const medium1 = /^(?=.*[0-9])(?=.*[A-Z])(?!.*[a-z])[A-Za-z0-9]+$/;
-const medium2 = /^(?=.*[0-9])(?=.*\W)(?!.*[a-z])[\w\W]+$/;
-const strong = /^(?=.*[A-Z])(?=.*\W)(?!.*[a-z]).*$/;
-const vStrong =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[A-Za-z\d@#$%^&+=]+$/;
+
 class Register extends Component {
   state = {
     name: "",
@@ -59,47 +55,87 @@ class Register extends Component {
   handelChange = (e) => {
     const { id, value, checked } = e.target;
     this.setState((prev) => ({ ...prev, [id]: value, check: checked }));
+    const strengthChecks = {
+      length: 0,
+      hasUpperCase: false,
+      hasLowerCase: false,
+      hasDigit: false,
+      hasSpecialChar: false,
+    };
+    if (id === "password") {
+      strengthChecks.length = value.length <= 9 ? true : false;
+      strengthChecks.hasUpperCase = /[A-Z]+/.test(value);
+      strengthChecks.hasLowerCase = /[a-z]+/.test(value);
+      strengthChecks.hasDigit = /[0-9]+/.test(value);
+      strengthChecks.hasSpecialChar = /[^A-Za-z0-9]+/.test(value);
 
-    this.setState((prev) => {
-      if (prev.password.length === 0) {
-        return {
-          ...prev,
-          degree: "",
-          title: "",
-        };
-      }
-      if (prev.password.length <= 9) {
-        return {
-          ...prev,
+      if (
+        !strengthChecks.length &&
+        strengthChecks.hasDigit &&
+        strengthChecks.hasUpperCase &&
+        strengthChecks.hasLowerCase &&
+        strengthChecks.hasSpecialChar
+      ) {
+        this.setState((perv) => ({
+          ...perv,
+          degree: degrees.degFour[0],
+          title: degrees.degFour[1],
+        }));
+      } else if (
+        !strengthChecks.length &&
+        strengthChecks.hasDigit &&
+        !strengthChecks.hasLowerCase &&
+        strengthChecks.hasUpperCase &&
+        strengthChecks.hasSpecialChar
+      ) {
+        this.setState((perv) => ({
+          ...perv,
+          degree: degrees.degThree[0],
+          title: degrees.degThree[1],
+        }));
+      } else if (
+        !strengthChecks.length &&
+        strengthChecks.hasDigit &&
+        !strengthChecks.hasLowerCase &&
+        (strengthChecks.hasUpperCase || strengthChecks.hasSpecialChar)
+      ) {
+        this.setState((perv) => ({
+          ...perv,
+          degree: degrees.degTwo[0],
+          title: degrees.degTwo[1],
+        }));
+      } else if (
+        strengthChecks.length &&
+        strengthChecks.hasDigit &&
+        !strengthChecks.hasUpperCase &&
+        !strengthChecks.hasLowerCase &&
+        !strengthChecks.hasSpecialChar
+      ) {
+        this.setState((perv) => ({
+          ...perv,
           degree: degrees.degOne[0],
           title: degrees.degOne[1],
-        };
-      } else {
-        let newState = {};
-        if (medium1.test(prev.password) || medium2.test(prev.password)) {
-          newState = {
-            ...prev,
-            degree: degrees.degTwo[0],
-            title: degrees.degTwo[1],
-          };
-        }
-        if (strong.test(prev.password)) {
-          newState = {
-            ...prev,
-            degree: degrees.degThree[0],
-            title: degrees.degThree[1],
-          };
-        }
-        if (vStrong.test(prev.password)) {
-          newState = {
-            ...prev,
-            degree: degrees.degFour[0],
-            title: degrees.degFour[1],
-          };
-        }
-        return newState;
+        }));
+      } else if (
+        !strengthChecks.length &&
+        strengthChecks.hasDigit &&
+        !strengthChecks.hasUpperCase &&
+        strengthChecks.hasLowerCase &&
+        strengthChecks.hasSpecialChar
+      ) {
+        this.setState((perv) => ({
+          ...perv,
+          degree: degrees.degTwo[0],
+          title: degrees.degTwo[1],
+        }));
+      } else if (value.length === 0) {
+        this.setState((perv) => ({
+          ...perv,
+          degree: "",
+          title: "",
+        }));
       }
-    });
+    }
   };
 
   handelSubmit = (e) => {
