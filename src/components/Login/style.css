@@ -60,7 +60,7 @@
   font-size: 1.1rem;
   color: #696f79;
 }
-.checkLabel > a {
+.loginAgreeLink {
   color: #1565da;
 }
 .submitBtn {

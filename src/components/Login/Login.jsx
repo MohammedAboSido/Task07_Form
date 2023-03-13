@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import githubImg from "../../assets/images/github.png";
 import googleImg from "../../assets/images/google.png";
 import linkedinImg from "../../assets/images/linkedin.png";
@@ -68,7 +69,10 @@ class Login extends Component {
         </form>
         <div className="loginAgree">
           <label htmlFor="check" className="checkLabel">
-            Don't have an account? <a href="/#">Register</a>
+            Don't have an account?{" "}
+            <Link to="/register" className="loginAgreeLink">
+              Register
+            </Link>
           </label>
         </div>
       </div>

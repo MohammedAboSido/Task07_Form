@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
+import backImg from "../../assets/images/arrow_back_icon.png";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import Separator from "../../components/Separatore/Separator";
@@ -159,6 +161,12 @@ class Register extends Component {
   render() {
     return (
       <div className="registerWrapper">
+        <div className="registerBack">
+          <Link to="/login" className="registerBackLink">
+            <img src={backImg} alt="" className="registerBackImg" />
+            <span className="registerBackTitle">Back</span>
+          </Link>
+        </div>
         <div className="registerDetails">
           <h2 className="registerTitle">Register Individual Account!</h2>
           <span className="registerDescription">
@@ -227,7 +235,9 @@ class Register extends Component {
         </form>
         <Separator title="or" />
         <div className="loginBtn">
-          <Button title="login" type="button" toggle />
+          <Link to="/login">
+            <Button title="login" type="button" toggle />
+          </Link>
         </div>
       </div>
     );
